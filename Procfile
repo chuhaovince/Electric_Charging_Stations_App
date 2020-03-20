@@ -1,1 +1,0 @@
-web: gunicorn Electric_Charging_Stations.app:app

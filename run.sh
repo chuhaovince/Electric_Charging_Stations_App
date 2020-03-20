@@ -1,1 +1,0 @@
-FLASK_APP=Electric_Charging_Stations/app.py flask run

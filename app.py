@@ -44,6 +44,7 @@ def add():
         connectionTitle = request.form["Plug_type"]
         ID = request.form["ID"]
         levelID = request.form["Level"]
+        POcode = request.form["POcode"]
 
         new_location = {
             "AddressInfo" : {
@@ -52,7 +53,8 @@ def add():
                 "Town" : town,
                 "StateOrProvince" : province,
                 "Latitude" : lat,
-                "Longitude" : lng
+                "Longitude" : lng,
+                "Postcode" : POcode
             },
             "Connections" : [{
                 "ConnectionType" : {

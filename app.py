@@ -24,20 +24,6 @@ app.app_context().push()
 app.config["MONGO_URI"] = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 mongo = PyMongo(app)
 
-# Store the API url
-opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=opendatapi"
-
-# track the application-level data during a request
-app.app_context().push()
-
-# Get resutls in json format
-#response = requests.get(opendataURL).json()
-
-# Create a new collection called stations
-#stationData = mongo.db.stations
-
-# Insert data into this collection(raw data)
-#stationData.insert_many(response)
 
 # create route that renders index.html template
 @app.route("/")
@@ -79,7 +65,7 @@ def add():
             }]
         }
         # Insert the new location data into database collection called stations
-        mongo.db.OpenData.insert(new_location)
+        mongo.db.newStations.insert(new_location)
         return redirect("/", code=302)
 
     return render_template("Add.html")

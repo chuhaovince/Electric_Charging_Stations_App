@@ -25,8 +25,11 @@ def main(args):
     # Get the default database heroku give us
     db = client.get_default_database()
 
-    # Create new collections under the default database
+    # Create a collection under the default database for storing all the stations
     opendataCollection = db["OpenData"]
+
+    # Create a new collection for user added stations
+    new = db["newStations"]
 
     # Clean up the database before updating new data
     opendataCollection.delete_many({})

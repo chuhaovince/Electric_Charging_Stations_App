@@ -73,12 +73,18 @@ def add():
     return render_template("Add.html")
 
 
-@app.route("/api/allocations")
+@app.route("/api/allocations") # This route returns you a json string of the total stations(api stations and user added stations)
 def locations():
     # Fetch all data from database and jsonify it
-    data = mongo.db.OpenData.find()
-    data = dumps(data)
-    #print(data)
+    # Get the api stations from mongodb and convert it to a python list
+    apidata_list = list(mongo.db.OpenData.find())
+    # Get the user stations from mongodb and convert it to a python list
+    user_list = list(mongo.db.new.find())
+    # Merge/union the two list together
+    total_list = apidata_list + user_list
+    # Convert the list back to json string which can then be used in JS
+    data = dumps(total_list)
+    # Return the result for this route so when this route is called, the json string is a response
     return data
 
 # @app.route("/api/types")

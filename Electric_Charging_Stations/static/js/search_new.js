@@ -1,10 +1,42 @@
-// Call api for all connector types
-connectorType_url = "/connectorType_api";
+// Adding base tile layer to the map
+L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  maxZoom: 18,
+  id: "mapbox.streets",
+  accessToken: API_KEY
+}).addTo(myMap);
 
-// Add connectorTypes to layer by using push function
+// Assemble API query URL from flask
+var url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&maxresults=100000&includecomments=true&verbose=true&opendata=true&client=ev-charging-stations&key=f6e470b3-c2f2-4c69-a477-3dbac08fea4b";
+//var url = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
+
+// Store the response in a variable
+var data = d3.json(url)
+
+// Create a layer group
 var layers = {};
-d3.json(connectorType_url,function(type) {
-  layers.type = new L.LayerGroup()
+
+// get all the connector types and add them into the layer group layers
+data.then(function(response) {
+  var types = {};
+  response.forEach(function(location){
+      var lis = location.Connections
+      for (i=0; i<lis.length; i++) {
+          var type = lis[i].ConnectionType.Title
+          console.log(type)
+          if (type in types){
+              types[type] = types[type]+1;
+          }
+          else {
+              types[type] = 1;
+          }
+      }
+  })
+  console.log(types)
+  var list_types = Object.keys(types);
+  for (type in list_types) {
+    layers.type = new L.LayerGroup();
+  };
 });
 
 // Creating map object when this page is open in the browser
@@ -12,20 +44,6 @@ var myMap = L.map("map", {
     center: [56.1304, -106.3468],
     zoom:4.4
   });
-  
-  // Adding base tile layer to the map
-  L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 18,
-    id: "mapbox.streets",
-    accessToken: API_KEY
-  }).addTo(myMap);
-
-// Assemble API query URL
-var url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&maxresults=100000&includecomments=true&verbose=true&opendata=true&client=ev-charging-stations&key=f6e470b3-c2f2-4c69-a477-3dbac08fea4b";
-//var url = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
-
-
 
 var markers = L.markerClusterGroup({maxClusterRadius: 30});
 

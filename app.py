@@ -21,7 +21,7 @@ app.app_context().push()
  #__author__ = 'mLab'
 
 # Use flask_pymongo to set up mongo connection
-app.config["MONGO_URI"] = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
+app.config["MONGO_URI"] = "mongodb://heroku_p85w0z3s:1hj6d4lipj3bbqn5p8j6lu30vc@ds311538.mlab.com:11538/heroku_p85w0z3s?retryWrites=false"
 mongo = PyMongo(app)
 
 

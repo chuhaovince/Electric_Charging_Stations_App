@@ -1,3 +1,12 @@
+// Call api for all connector types
+connectorType_url = "/connectorType_api";
+
+// Add connectorTypes to layer by using push function
+var layers = {};
+d3.json(connectorType_url,function(type) {
+  layers.type = new L.LayerGroup()
+});
+
 // Creating map object when this page is open in the browser
 var myMap = L.map("map", {
     center: [56.1304, -106.3468],

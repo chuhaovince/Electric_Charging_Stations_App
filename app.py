@@ -84,6 +84,8 @@ def locations():
     total_list = apidata_list + user_list
     # Convert the list back to json string which can then be used in JS
     data = dumps(total_list)
+    # Replace all null values with Unknown
+    data = data.replace("null","Unknown")
     # Return the result for this route so when this route is called, the json string is a response
     return data
 

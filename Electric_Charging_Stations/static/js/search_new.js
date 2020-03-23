@@ -16,6 +16,8 @@ var myMap = L.map("map", {
 var url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&maxresults=100000&includecomments=true&verbose=true&opendata=true&client=ev-charging-stations&key=f6e470b3-c2f2-4c69-a477-3dbac08fea4b";
 //var url = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 
+
+
 var markers = L.markerClusterGroup({maxClusterRadius: 30});
 
 // Grab the data with d3
@@ -48,3 +50,42 @@ d3.json(url,function(response) {
     }
     myMap.addLayer(markers)
 });
+
+//Seach Nearby Button Handler
+function handleSearchNearBy() {
+
+  d3.event.preventDefault();
+  
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+    console.log(navigator.geolocation.watchPosition(showPosition))
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  var lat = position.coords.latitude;
+  var lng = position.coords.longitude;
+  current_location=[lat,lng]
+  
+  console.log(current_location);
+// getData(current_location);
+buildMap(current_location);
+};
+
+var Mymarker = {};
+function buildMap(current_location) {
+// Create a new marker
+// Pass in some initial options, and then add it to the map using the addTo method
+var Mymarker = L.circle(current_location,{
+  color : "blue",
+  fillOpacity : 1
+}).addTo(myMap);
+// Binding a pop-up to our marker
+Mymarker.bindPopup("Current Position");
+myMap.panTo(Mymarker.getLatLng());
+myMap.setZoom(16)
+};
+
+d3.select("#submit").on("click", handleSearchNearBy);

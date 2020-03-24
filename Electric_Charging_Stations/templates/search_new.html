@@ -24,13 +24,13 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
 
     <link rel="stylesheet" type="text/css" href="../static/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/search.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/search_new.css">
     <link rel="stylesheet" type="text/css" href="../static/css/media.css">
 
   </head>
   <body>
   <nav class="navbar navbar-expand-lg"> <!--navigation bar-->
-    <a class="navbar-brand" href="/">GreenCharging</a>
+    <a class="navbar-brand" href="/">Charge-Snack-Go</a>
     <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,26 +42,46 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/search">Search Nearby</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/login">LOGIN</a>
-            </li>
         </ul>
       </div>
   </nav>
+
+  <!-- <img src="../static/img/stationandsnack.jpg" alt="stationandsnack" width=100% height=100%> -->
+
   <div class="container">
-    <div class="jumbotron" style="text-align: center">
-        <h1>Search Stations Nearby</h1>
-        <p>Please select the connection type</p>
+    <img src="../static/img/stationandsnack.jpg" alt="stationandsnack" width=100% height=130%>
+
+    <div class="centered">
+      <h1> Charge, have a Snack and Go </h1>
+      <br>
+
+      <h2>Please search Station nearby and find coffee shop or restaurant around</h2>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
   </div>
+
+  <!-- <div class="container">
+
+    <!-- <style>
+      body {
+        background-image: <img src="../static/img/stationandsnack.jpg">
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+      }
+    </style> -->
+
+    <!-- <div class="jumbotron" style="text-align: center">
+        <h1>Charge, have a Snack and Go</h1>
+        <p>Please search Station nearby and find coffee shop or restaurant around</p>
+    </div>
+  </div> --> -->
   <div class="container map-container">
     <div class="row">
       <div class="col-lg-6 col-sm-6 col-sm-12">
-        <select id="selDataset">
-            <option value="Level 1 : Low (Under 2kW)">Level 1 : Low (Under 2kW)</option>
-            <option value="Level 2 : Medium (Over 2kW)">Level 2 : Medium (Over 2kW)</option>
-            <option value="Level 3:  High (Over 40kW)">Level 3:  High (Over 40kW)</option>
-        </select>
       </div> 
       <div class="col-lg-6 col-sm-6 col-sm-12">
         <button id="submit" type="submit">Find Stations Near Me</button>

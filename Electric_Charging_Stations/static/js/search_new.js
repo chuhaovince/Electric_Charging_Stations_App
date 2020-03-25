@@ -7,7 +7,7 @@ var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.pn
 });
 
 // Assemble API query URL from flask
-//var url = "/api/allocations";
+// var url = "/api/allocations";
 var url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=CA&maxresults=100000&includecomments=true&verbose=true&opendata=true&client=ev-charging-stations&key=f6e470b3-c2f2-4c69-a477-3dbac08fea4b"
 //var url = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 
@@ -16,63 +16,61 @@ var data = d3.json(url);
 
 // get all the connector types and add them into the layer group layers
 data.then(function(response) {
-
-  //console.log(response);
   // make a js object that stores the connector types and the number of each
   var types = {};
   var overlaysDict = {};
 
   response.forEach(function(location){
+    // Get the list of connection types for each station
     var lis = location.Connections
+    // Get the address information for each station
     var latlng = location.AddressInfo
+    // Get the address and city for each station
     var address = latlng.AddressLine1
+    var town = latlng.Town
     // Replace all space in the address string with "+"
     address = address.replace(/ /g,"+")
+    // Concatenate the address and the city string 
+    var plus = address.concat("+")
+    var full_address = plus + town
+    // Define all google map url for directions and search nearby
+    var DIR_link = 'https://www.google.com/maps/dir/?api=1&origin=current+location&destination=' +  full_address + '' + '&travelmode=driving';
+    var hotel_link ="https://www.google.com/maps/search/?api=1&query=hotel+around+" + full_address
+    var rest_link = "https://www.google.com/maps/search/?api=1&query=restaurants+around+" + full_address
+    var mall_link = "https://www.google.com/maps/search/?api=1&query=+around+" + full_address
+    // Add button function to each popup
+    //var direction = '<button<a href ='+DIR_link+' target="_blank">Get Direction</a></button>'
+    //var direction = '<form action="' + DIR_link + '" method ="get" target="_blank"><button type="submit">Get Direction</button>'
+    //var direction = '<button onclick="window.location.href="' + DIR_link + '";">Click Here</button>'
+    var direction = '<a href=' + DIR_link + ' target="_blank"><button>Get Direction</button></a>'
+    var hotel = '<a href=' + hotel_link + ' target="_blank"><button>Hotels Nearby</button></a>'
+    var rest = '<a href=' + rest_link + ' target="_blank"><button>Hotels Nearby</button></a>'
     // console.log(address)
     for (i=0; i<lis.length; i++) {
       var type = lis[i].ConnectionType.Title
-        //console.log(type)
+      //console.log(type)
+      // Check each connector type, if the type exists, add the mark and popup, if not, add the new type to the 
+      // layer group and add the mark and popup
       if (type in types){
         types[type] = types[type]+1;
-        var link = 'https://www.google.com/maps/dir/?api=1&origin=current+location&destination=' +  address + '&travelmode=driving';
-        //var direction = '<button id="direction" type="button"><a href ='+link+'target="_blank">Get Direction</button>'
-        //var direction =  '<input type=button onclick="window.open("https://www.google.com","_blank")"  class="btn btn-success" >Explore More</button>';
-        var direction = '<input type=button onClick="parent.open("https://www.google.com")" value="Get Direction">'
-        var detail = '<button id="detail" type="button">More Info</button>'
-
         var newMarker = L.marker([latlng.Latitude, latlng.Longitude]);
         newMarker.addTo(overlaysDict[type]);
-        newMarker.bindPopup("<h3>"+latlng.Title+"</h3><hr><p>"+"ConnectionType: "+ type + "</p> <p> Power Level: " + lis[i].LevelID +"<br>" + direction + "<br>" +detail);
+        newMarker.bindPopup("<h3>"+latlng.Title+"</h3><hr><p>"+"ConnectionType: "+ type + "</p> <p> Power Level: " + lis[i].LevelID +"<br>" + direction + "<br>" +hotel);
       }
       else {
         types[type] = 1;
         overlaysDict[type] = new L.LayerGroup();
         // Set the data location property to a variable
-        var link = 'https://www.google.com/maps/dir/?api=1&origin=current+location&destination=' +  address + '&travelmode=driving';
-        var direction = '<input type=button onClick="parent.open("https://www.google.com")" value="Get Direction">'
-        var detail = '<button id="detail" type="button">More Info</button>'
-
+        // var DIR_link = 'https://www.google.com/maps/dir/?api=1&origin=current+location&destination=' +  full_address + '&travelmode=driving';
+        // var direction = '<a href ='+DIR_link+' target="_blank">Get Direction</a>'
+        // var hotel = '<a href=' + hotel_link + ' target="_blank"><button>Hotels Nearby</button></a>'
         var newMarker = L.marker([latlng.Latitude, latlng.Longitude]);
         newMarker.addTo(overlaysDict[type]);
-        newMarker.bindPopup("<h3>"+latlng.Title+"</h3><hr><p>"+"ConnectionType: "+ type + "</p> <p> Power Level: " + lis[i].LevelID +"<br>" + direction + "<br>" +detail);
+        newMarker.bindPopup("<h3>"+latlng.Title+"</h3><hr><p>"+"ConnectionType: "+ type + "</p> <p> Power Level: " + lis[i].LevelID +"<br>" + direction + "<br>" +hotel);
       };
     };
   });
-  //console.log(types)
-  // Get only the distinct connector types from the object
-  
-  // var list_types = Object.keys(types);
-    
-  //  console.log(list_types);
-  // // Add each type to layers group
-  // for (var CT in list_types) {
-  //   // console.log(list_types[CT]);
-  //   overlaysDict[list_types[CT]] = new L.LayerGroup();
-  // };
-  console.log(overlaysDict);
-  // console.log("finished!")
 
-  // return overlaysDict
   // Creating map object when this page is open in the browser
   var myMap = L.map("map", {
     center: [56.1304, -106.3468],
@@ -90,45 +88,7 @@ data.then(function(response) {
   // Create a control for our layers, add our overlay layers to it
    L.control.layers(null, overlaysDict).addTo(myMap);
 
-  // for (var i = 0; i < response.length; i++) {
-  
-  //   // Set the data location property to a variable
-  //   var location = response[i].AddressInfo;
-  //   var direction = '<button id="direction" type="button">Get Direction</button>'
-  //   var detail = '<button id="detail" type="button">More Info</button>'
-  //   var link = "https://www.google.com/maps/dir/" +  location.AddressLine1;
-
-  //   var connectionType = response[i].Connections;
-  //   for (i in Object.keys(overlaysDict)) {
-  //     connectionType.forEach(type => {
-  //       if (type.ConnectionType.Title === Object.keys(overlaysDict)[i]) {
-          
-  //       }
-  //     var newMarker = L.marker([location.Latitude, location.Longitude]);
-  //     newMarker.addTo(overlaysDict[Object.keys(overlaysDict)[i]]);
-  //     newMarker.bindPopup("<h3>"+response[i].AddressInfo.Title+"</h3><hr><p>"+"ConnectionType: "+ response[i].Connections[0].ConnectionType.Title + "</p> <p> Power Level: " + response[i].Connections[0].Level.Title + '</p><a href="' + link + '  target="_blank">' + direction + "</a><br>" +detail);
-  //     })
-  //   }
-
-  //   // if (
-  //   // response[i].Connections.length > 0
-  //   // && response[i].Connections[0].ConnectionType.Title
-  //   // && response[i].AddressInfo
-  //   // && response[i].Connections[0].Level
-  //   // && response[i].Connections[0].Level.Title
-  //   // // && response[i].Connections[0].Level.Title=="Level 1 : Low (Under 2kW)"
-  //   // ) {
-  //   // Add a new marker to the cluster group and bind a pop-up
-  //   // markers.addLayer(L.marker([location.Latitude, location.Longitude])
-  //   //   .bindPopup("<h3>"+response[i].AddressInfo.Title+"</h3><hr><p>"+"ConnectionType: "+ response[i].Connections[0].ConnectionType.Title + "</p> <p> Power Level: " + response[i].Connections[0].Level.Title + '</p><a href="' + link + '  target="_blank">' + direction + "</a><br>" +detail));
-  //   //   console.log("Complete!")
-    
-  //     // }
- 
-  // };
-  // myMap.addLayer(markers)
-
-  //Seach Nearby Button Handler
+  //Seach Nearby Button Handler, get the user's current location by calling function showPosition
   function handleSearchNearBy() {
 
     d3.event.preventDefault();
@@ -145,27 +105,28 @@ data.then(function(response) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
     current_location=[lat,lng]
-    
     console.log(current_location);
-    // getData(current_location);
     buildMap(current_location);
   };
 
-var Mymarker = {};
-if (Mymarker.length>0) {
-  Mymarker.remove()
-}
-function buildMap(current_location) {
-// Create a new marker
-// Pass in some initial options, and then add it to the map using the addTo method
-var Mymarker = L.circle(current_location).addTo(myMap);
-// Binding a pop-up to our marker
-Mymarker.bindPopup("You Are Here");
-myMap.panTo(Mymarker.getLatLng());
-myMap.setZoom(15);
-};
+  // Function buildMap to add the marker of user's current location to the map
+  function buildMap(current_location) {
+  // Create a new marker, if the marker exists, remove it and create a new one
+  var Mymarker = {};
+  if (Mymarker.length>0) {
+    Mymarker.remove()
+  };
+  // Pass in some initial options, and then add it to the map using the addTo method
+  var Mymarker = L.circle(current_location).addTo(myMap);
+  // Binding a pop-up to our marker
+  Mymarker.bindPopup("You Are Here");
+  // Set the map view to the current location and zoom it in
+  myMap.panTo(Mymarker.getLatLng());
+  myMap.setZoom(15);
+  };
 
-d3.select("#submit").on("click", handleSearchNearBy);
+  // Call function handleSearchNearby when button "Search Nearby" is clicked
+  d3.select("#submit").on("click", handleSearchNearBy);
 
 });
 

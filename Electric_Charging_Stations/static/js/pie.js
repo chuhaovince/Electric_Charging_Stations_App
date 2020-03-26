@@ -22,6 +22,7 @@ d3.json(url).then(function(response) {
         }
     })
 
+    
     var data = [{
         values: [lvl1, lvl2, lvl3],
         labels: ['Level 1: Under 2KW', 'Level 2: Over 2KW', 'Level 3: Over 40KW'],

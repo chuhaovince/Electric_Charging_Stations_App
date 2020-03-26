@@ -37,7 +37,7 @@ data.then(function(response) {
     var DIR_link = 'https://www.google.com/maps/dir/?api=1&origin=current+location&destination=' +  full_address + '' + '&travelmode=driving';
     var hotel_link ="https://www.google.com/maps/search/?api=1&query=hotel+around+" + full_address
     var rest_link = "https://www.google.com/maps/search/?api=1&query=restaurants+around+" + full_address
-    var mall_link = "https://www.google.com/maps/search/?api=1&query=+around+" + full_address
+    var mall_link = "https://www.google.com/maps/search/?api=1&query=shopping+around+" + full_address
     // Add button function to each popup
     //var direction = '<button<a href ='+DIR_link+' target="_blank">Get Direction</a></button>'
     //var direction = '<form action="' + DIR_link + '" method ="get" target="_blank"><button type="submit">Get Direction</button>'
@@ -45,6 +45,7 @@ data.then(function(response) {
     var direction = '<a href=' + DIR_link + ' target="_blank"><button>Get Direction</button></a>'
     var hotel = '<a href=' + hotel_link + ' target="_blank"><button>Hotels Nearby</button></a>'
     var rest = '<a href=' + rest_link + ' target="_blank"><button>Hotels Nearby</button></a>'
+    var shopping = '<a href=' + mall_link + ' target="_blank"><button>Hotels Nearby</button></a>'
     // console.log(address)
     for (i=0; i<lis.length; i++) {
       var type = lis[i].ConnectionType.Title
@@ -55,7 +56,7 @@ data.then(function(response) {
         types[type] = types[type]+1;
         var newMarker = L.marker([latlng.Latitude, latlng.Longitude]);
         newMarker.addTo(overlaysDict[type]);
-        newMarker.bindPopup("<h3>"+latlng.Title+"</h3><hr><p>"+"ConnectionType: "+ type + "</p> <p> Power Level: " + lis[i].LevelID +"<br>" + direction + "<br>" +hotel);
+        newMarker.bindPopup("<h3>"+latlng.Title+"</h3><hr><p>"+"ConnectionType: "+ type + "</p> <p> Power Level: " + lis[i].LevelID +"<br>" + direction + "<br>" +hotel + "<br>" + rest + "<br>" + shopping);
       }
       else {
         types[type] = 1;
@@ -66,7 +67,7 @@ data.then(function(response) {
         // var hotel = '<a href=' + hotel_link + ' target="_blank"><button>Hotels Nearby</button></a>'
         var newMarker = L.marker([latlng.Latitude, latlng.Longitude]);
         newMarker.addTo(overlaysDict[type]);
-        newMarker.bindPopup("<h3>"+latlng.Title+"</h3><hr><p>"+"ConnectionType: "+ type + "</p> <p> Power Level: " + lis[i].LevelID +"<br>" + direction + "<br>" +hotel);
+        newMarker.bindPopup("<h3>"+latlng.Title+"</h3><hr><p>"+"ConnectionType: "+ type + "</p> <p> Power Level: " + lis[i].LevelID +"<br>" + direction + "<br>" +hotel + "<br>" + rest + "<br>" + shopping);
       };
     };
   });

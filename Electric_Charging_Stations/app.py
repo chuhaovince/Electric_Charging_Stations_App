@@ -68,7 +68,7 @@ def add():
         }
         # Insert the new location data into database collection called stations
         mongo.db.newStations.insert(new_location)
-        return redirect("/", code=302)
+        return redirect("/search", code=302)
 
     return render_template("Add.html")
 
@@ -99,9 +99,9 @@ def locations():
 def search():
     return render_template("search_new.html")
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
+# @app.route("/login")
+# def login():
+#     return render_template("login.html")
     
 
 # @app.route("/api/filter")

@@ -44,8 +44,8 @@ data.then(function(response) {
     //var direction = '<button onclick="window.location.href="' + DIR_link + '";">Click Here</button>'
     var direction = '<a href=' + DIR_link + ' target="_blank"><button>Get Direction</button></a>'
     var hotel = '<a href=' + hotel_link + ' target="_blank"><button>Hotels Nearby</button></a>'
-    var rest = '<a href=' + rest_link + ' target="_blank"><button>Hotels Nearby</button></a>'
-    var shopping = '<a href=' + mall_link + ' target="_blank"><button>Hotels Nearby</button></a>'
+    var rest = '<a href=' + rest_link + ' target="_blank"><button>Restaurants Nearby</button></a>'
+    var shopping = '<a href=' + mall_link + ' target="_blank"><button>Shopping Nearby</button></a>'
     // console.log(address)
     for (i=0; i<lis.length; i++) {
       var type = lis[i].ConnectionType.Title

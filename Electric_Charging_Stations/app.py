@@ -79,7 +79,7 @@ def locations():
     # Get the api stations from mongodb and convert it to a python list
     apidata_list = list(mongo.db.OpenData.find())
     # Get the user stations from mongodb and convert it to a python list
-    user_list = list(mongo.db.new.find())
+    user_list = list(mongo.db.newStations.find())
     # Merge/union the two list together
     total_list = apidata_list + user_list
     # Convert the list back to json string which can then be used in JS

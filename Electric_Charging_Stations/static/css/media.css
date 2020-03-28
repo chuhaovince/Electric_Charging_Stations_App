@@ -43,6 +43,7 @@
     }
 
     .container-img {
+        background-image: url("../img/stationandsnack.jpg");
         background-size: 550px;
         height: 300px;
       }
@@ -92,6 +93,7 @@
     }
 
     .container-img {
+        background-image: url("../img/stationandsnack.jpg");
         background-size: 550px;
         height: 300px;
       }
@@ -131,6 +133,7 @@
     }
 
     .container-img {
+        background-image: url("../img/stationandsnack.jpg");
         background-size: 800px;
         height: 400px;
       }

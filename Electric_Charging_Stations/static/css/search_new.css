@@ -29,12 +29,18 @@ button {
   transform: translate(-50%, -50%);
 }
 
-.centered h1 {
+.container {
+  background-image: url("../img/stationandsnack.jpg");
+  background-size: 1000px;
+  height: 500px;
+}
+
+.p-title {
   color: rgb(9, 51, 18)
 }
 
-.centered h3 {
-  color: rgb(9, 51, 18)
+.p-text {
+  color: rgb(255, 0, 0)
 }
 
 #map {

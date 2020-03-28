@@ -33,6 +33,19 @@
         background-color: rgb(6, 156, 156);
         box-shadow: none;
     }
+
+    .p-title {
+        font-size: 30px;
+    }
+
+    .p-text {
+        font-size: 20px;
+    }
+
+    .container-img {
+        background-size: 550px;
+        height: 300px;
+      }
   
 }
   
@@ -69,6 +82,19 @@
         background-color: rgb(6, 156, 156);
         box-shadow: none;
     }
+
+    .p-title {
+        font-size: 30px;
+    }
+
+    .p-text {
+        font-size: 20px;
+    }
+
+    .container-img {
+        background-size: 550px;
+        height: 300px;
+      }
 }
   
 @media (min-width: 768px) and (max-width: 991.98px) { /*medium*/
@@ -95,10 +121,31 @@
         background-color: rgb(6, 156, 156);
         box-shadow: none;
     }
+
+    .p-title {
+        font-size: 50px;
+    }
+
+    .p-text {
+        font-size: 30px;
+    }
+
+    .container-img {
+        background-size: 800px;
+        height: 400px;
+      }
 }
   
 @media (min-width: 992px) {
     .my-3 {
         display: none;
+    }
+
+    .p-title {
+        font-size: 50px;
+    }
+
+    .p-text {
+        font-size: 30px;
     }
 }

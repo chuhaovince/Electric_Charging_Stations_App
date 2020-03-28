@@ -35,11 +35,11 @@ button {
   height: 500px;
 }
 
-.img-container h1 {
+.p-title {
   color: rgb(9, 51, 18)
 }
 
-.img-container h3 {
+.p-text {
   color: rgb(255, 0, 0)
 }
 

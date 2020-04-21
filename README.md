@@ -19,10 +19,12 @@ This is a Flask APP deployed on Heroku with MongoDB. the web APP is aimed at map
     5. get direction to the selected location with google map routing
     6. see what can you do near a specific location(when the car is charging), such as hotels, restaurants and etc.
 
-## Connector types distribution
+## Connector types and charging levels distribution
 
 ![Connector-types-distribution](Electric_Charging_Stations/static/img/connector_types_and_levels.PNG)
 
 The data was acquired from the Open Charge Map API, which can be found here: https://openchargemap.org/site. Then a MongoDB database was created on Heroku MLab using the data with about 5000 stations. From the charts above, we can see there are about 10 different types of connectors and 3 different charging levels in total. Type 1(J1772) dominates the connector types while level 2 occupies almost 80% of all the levels.
 
-## 
+## Add a location of new station
+
+![add_new_station](https://openchargemap.org/site)

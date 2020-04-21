@@ -27,4 +27,7 @@ The data was acquired from the Open Charge Map API, which can be found here: htt
 
 ## Add a location of new station
 
-![add_new_station](https://openchargemap.org/site)
+![add_new_station](Electric_Charging_Stations/static/img/add_location.PNG)
+
+Just by filling in simple infomation, a user can easily add a new location which was not there in the APP, it can be some official stations run by Tesla for example, or it can jsut be some personal charing points and user and add them to share with neighbors and earn some income.
+

@@ -31,3 +31,20 @@ The data was acquired from the Open Charge Map API, which can be found here: htt
 
 Just by filling in simple infomation, a user can easily add a new location which was not there in the APP, it can be some official stations run by Tesla for example, or it can jsut be some personal charing points and user and add them to share with neighbors and earn some income.
 
+## See and search the map
+
+With our APP, users can also see the total map and search the stations near them. the screenshot below shows the total stations across Canada, there are about 5000 stations in total.
+
+![full_map](Electric_Charging_Stations/static/img/Full_map.PNG)
+
+A user can also search the nearby stations with the connector types they choose. Below is an example map searched nearby  with all the connector types.
+
+![search_nearby](Electric_Charging_Stations/static/img/search_nearby.PNG)
+
+From the screenshot, you can see that there are some options for each location, people can see the navigation routing with the help of Google Map, and they can also see what's near the specific location so they can make better plans for their trip.
+
+For getting the directions, below is an example:
+![directions](Electric_Charging_Stations/static/img/Google_routing.PNG)
+
+For an example of what to do nearby:
+![hotels](Electric_Charging_Stations/static/img/hotels_nearby.PNG)

@@ -22,3 +22,7 @@ This is a Flask APP deployed on Heroku with MongoDB. the web APP is aimed at map
 ## Connector types distribution
 
 ![Connector-types-distribution](Electric_Charging_Stations/static/img/connector_types_and_levels.PNG)
+
+The data was acquired from the Open Charge Map API, which can be found here: https://openchargemap.org/site. Then a MongoDB database was created on Heroku MLab using the data with about 5000 stations. From the charts above, we can see there are about 10 different types of connectors and 3 different charging levels in total. Type 1(J1772) dominates the connector types while level 2 occupies almost 80% of all the levels.
+
+## 

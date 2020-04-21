@@ -46,5 +46,5 @@ From the screenshot, you can see that there are some options for each location, 
 For getting the directions, below is an example:
 ![directions](Electric_Charging_Stations/static/img/Google_routing.PNG)
 
-For an example of what to do nearby:
+For an example of hotels nearby:
 ![hotels](Electric_Charging_Stations/static/img/hotels_nearby.PNG)

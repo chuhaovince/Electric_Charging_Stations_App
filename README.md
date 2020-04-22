@@ -10,7 +10,8 @@ As more and more EVs are drving on the road, the stations for charing EVs also e
 
 ## About the APP
 
-Click [here](https://chargetastic.herokuapp.com/) to view the APP
+**Click [here](https://chargetastic.herokuapp.com/) to view the APP.**
+
 This is a Flask APP deployed on Heroku with MongoDB. the web APP is aimed at mapping all the electric charging stations across the Canada for new EVs' users. With this APP, users can:
 
     1. see the distribution of different charging connector types as well as the charging levels
